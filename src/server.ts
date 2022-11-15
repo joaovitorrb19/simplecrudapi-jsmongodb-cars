@@ -2,7 +2,15 @@ import express from 'express'
 import mongoose from 'mongoose'
 import router from './router'
 
+
 const server = express()
+server.use(express.json())
+
+
+server.use(router)
+server.use(express.json())
+
+
 const database = mongoose.connect('mongodb://joao:teste@localhost:27017/admin')
 .then((data)=>{
     console.log('Conectou com sucesso ao mongodb!')
@@ -11,9 +19,6 @@ const database = mongoose.connect('mongodb://joao:teste@localhost:27017/admin')
     console.log('erro ao connectar com o banco:' , err.message)
 })
 
-
-server.use(router)
-server.use(express.json)
 
 server.listen(3000)
 
